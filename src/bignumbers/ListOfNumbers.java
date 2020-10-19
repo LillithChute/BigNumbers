@@ -1,10 +1,9 @@
 package bignumbers;
 
 /**
- * This defines the operations allowed to perform of large numbers stored as sequential lists.
+ * An internal implementation of linked list operations for BigNumber.
  */
-public interface BigNumber {
-
+public interface ListOfNumbers {
   /**
    * This returns the number of digits in this number.
    *
@@ -18,7 +17,7 @@ public interface BigNumber {
    *
    * @param numberOfShifts The number of places that the BigNumber will move.
    */
-  void leftShift(int numberOfShifts);
+  ListOfNumbers leftShift(int numberOfShifts);
 
   /**
    * the number of shifts as an argument and shifts this number to the right by that number.
@@ -27,7 +26,7 @@ public interface BigNumber {
    *
    * @param numberOfShifts The number of places that the BigNumber will move.
    */
-  void rightShift(int numberOfShifts);
+  ListOfNumbers rightShift(int numberOfShifts);
 
   /**
    * takes a single digit as an argument and adds it to this number.
@@ -35,9 +34,17 @@ public interface BigNumber {
    * single non-negative digit.
    *
    * @param singleDigit The single digit to add to the BigNumber.
-   * @throws IllegalArgumentException if the digit passed to it is not a single non-negative digit.
+   * @throws IllegalArgumentException if the digit passed to it is not a single
+   *     non-negative digit.
    */
-  void addDigit(int singleDigit) throws IllegalArgumentException;
+  ListOfNumbers addDigit(int singleDigit) throws IllegalArgumentException;
+
+  /**
+   * This will retrieve the digit that is carried in add operations.
+   *
+   * @return The carry digit.
+   */
+  int getCarryDigit();
 
   /**
    * Takes a position as an argument and returns the digit at that position.
@@ -49,7 +56,21 @@ public interface BigNumber {
    */
   int getDigitAt(int positionOfDigit) throws IllegalArgumentException;
 
-  BigNumber copy();
+  /**
+   * Gets the value of the current node.
+   *
+   * @return The number.
+   */
+  int getValue();
+
+  /**
+   * Gets the next node.
+   *
+   * @return The next node.
+   */
+  ListOfNumbers getNextNode();
+
+  ListOfNumbers copy();
 
   /**
    * This takes another BigNumber and returns the sum of these two numbers.
@@ -58,5 +79,28 @@ public interface BigNumber {
    * @param numberToAdd A BigNumber that will be added to this number.
    * @return An independent BigNumber.
    */
-  BigNumber add(BigNumber numberToAdd);
+  ListOfNumbers add(ListOfNumbers numberToAdd);
+
+  /**
+   * Set the next node from this one.
+   *
+   * @param next the next {@link ListOfNumbers} node
+   * @throws IllegalArgumentException if the next node is null
+   */
+  void setNextNode(ListOfNumbers next);
+
+  /**
+   * Sets the value of the current node.
+   *
+   * @param value the new value
+   * @throws IllegalArgumentException if the valid is not a single digit and non-negative
+   */
+  void setNodeValue(int value);
+
+  /**
+   * Set the carry of the current node, which helps number addition.
+   *
+   * @param value the carry value
+   */
+  void setCarry(int value);
 }
