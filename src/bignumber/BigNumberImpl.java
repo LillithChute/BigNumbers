@@ -1,4 +1,4 @@
-package bignumbers;
+package bignumber;
 
 /**
  * This will build a linked list of single digit numbers that will be used to
@@ -38,18 +38,18 @@ public class BigNumberImpl implements BigNumber {
   }
 
   @Override
-  public int count() {
-    return this.number.count();
+  public int length() {
+    return this.number.length();
   }
 
   @Override
-  public void leftShift(int numberOfShifts) {
-    this.number = this.number.leftShift(numberOfShifts);
+  public void shiftLeft(int numberOfShifts) {
+    this.number = this.number.shiftLeft(numberOfShifts);
   }
 
   @Override
-  public void rightShift(int numberOfShifts) {
-    this.number = this.number.rightShift(numberOfShifts);
+  public void shiftRight(int numberOfShifts) {
+    this.number = this.number.shiftRight(numberOfShifts);
   }
 
   @Override
@@ -71,6 +71,14 @@ public class BigNumberImpl implements BigNumber {
   public BigNumber add(BigNumber numberToAdd) {
     ListOfNumbers right = new ElementNode(numberToAdd.toString());
     return new BigNumberImpl(this.number.add(right));
+  }
+
+  @Override
+  public int compareTo(BigNumber o) {
+    ListOfNumbers left = new ElementNode(this.toString());
+    ListOfNumbers right = new ElementNode(o.toString());
+
+    return left.compareTo(right);
   }
 
   @Override

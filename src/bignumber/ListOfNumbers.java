@@ -1,15 +1,15 @@
-package bignumbers;
+package bignumber;
 
 /**
  * An internal implementation of linked list operations for BigNumber.
  */
-public interface ListOfNumbers {
+public interface ListOfNumbers extends Comparable<ListOfNumbers> {
   /**
    * This returns the number of digits in this number.
    *
    * @return The number of digits.
    */
-  int count();
+  int length();
 
   /**
    * The number of shifts as an argument and shifts this number to the left by that number.
@@ -17,7 +17,7 @@ public interface ListOfNumbers {
    *
    * @param numberOfShifts The number of places that the BigNumber will move.
    */
-  ListOfNumbers leftShift(int numberOfShifts);
+  ListOfNumbers shiftLeft(int numberOfShifts);
 
   /**
    * the number of shifts as an argument and shifts this number to the right by that number.
@@ -26,7 +26,7 @@ public interface ListOfNumbers {
    *
    * @param numberOfShifts The number of places that the BigNumber will move.
    */
-  ListOfNumbers rightShift(int numberOfShifts);
+  ListOfNumbers shiftRight(int numberOfShifts);
 
   /**
    * takes a single digit as an argument and adds it to this number.

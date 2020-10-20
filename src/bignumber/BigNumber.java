@@ -1,16 +1,16 @@
-package bignumbers;
+package bignumber;
 
 /**
  * This defines the operations allowed to perform of large numbers stored as sequential lists.
  */
-public interface BigNumber {
+public interface BigNumber extends Comparable<BigNumber> {
 
   /**
    * This returns the number of digits in this number.
    *
    * @return The number of digits.
    */
-  int count();
+  int length();
 
   /**
    * The number of shifts as an argument and shifts this number to the left by that number.
@@ -18,7 +18,7 @@ public interface BigNumber {
    *
    * @param numberOfShifts The number of places that the BigNumber will move.
    */
-  void leftShift(int numberOfShifts);
+  void shiftLeft(int numberOfShifts);
 
   /**
    * the number of shifts as an argument and shifts this number to the right by that number.
@@ -27,7 +27,7 @@ public interface BigNumber {
    *
    * @param numberOfShifts The number of places that the BigNumber will move.
    */
-  void rightShift(int numberOfShifts);
+  void shiftRight(int numberOfShifts);
 
   /**
    * takes a single digit as an argument and adds it to this number.

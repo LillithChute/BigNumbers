@@ -3,8 +3,8 @@ package bignumberstest;
 import org.junit.Before;
 import org.junit.Test;
 
-import bignumbers.ElementNode;
-import bignumbers.ListOfNumbers;
+import bignumber.ElementNode;
+import bignumber.ListOfNumbers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
@@ -86,9 +86,9 @@ public class BigNumberTest {
 
   @Test
   public void leftShiftZeroTest() {
-    testBigNumbers = testBigNumbers.leftShift(2);
+    testBigNumbers = testBigNumbers.shiftLeft(2);
     assertEquals("0", testBigNumbers.toString());
-    testBigNumbers = testBigNumbers.leftShift(0);
+    testBigNumbers = testBigNumbers.shiftLeft(0);
     assertEquals("0", testBigNumbers.toString());
   }
 
@@ -97,7 +97,7 @@ public class BigNumberTest {
     testBigNumbers = testBigNumbers.addDigit(6);
     assertEquals("6", testBigNumbers.toString());
 
-    testBigNumbers = testBigNumbers.leftShift(1);
+    testBigNumbers = testBigNumbers.shiftLeft(1);
     testBigNumbers = testBigNumbers.addDigit(5);
     assertEquals("65", testBigNumbers.toString());
   }
@@ -105,31 +105,31 @@ public class BigNumberTest {
   @Test
   public void leftShiftWithNegativeTest() {
     testBigNumbers = new ElementNode(1);
-    testBigNumbers = testBigNumbers.leftShift(3);
+    testBigNumbers = testBigNumbers.shiftLeft(3);
     assertEquals("1000", testBigNumbers.toString());
 
-    testBigNumbers = testBigNumbers.leftShift(-1);
+    testBigNumbers = testBigNumbers.shiftLeft(-1);
     assertEquals("100", testBigNumbers.toString());
   }
 
   @Test
   public void rightShiftByOneTest() {
     testBigNumbers = new ElementNode(9, new ElementNode(8, new ElementNode(7)));
-    testBigNumbers = testBigNumbers.rightShift(1);
+    testBigNumbers = testBigNumbers.shiftRight(1);
     assertEquals("78", testBigNumbers.toString());
   }
 
   @Test
   public void rightShiftByTwoTest() {
     testBigNumbers = new ElementNode(3, new ElementNode(2, new ElementNode(1)));
-    testBigNumbers = testBigNumbers.rightShift(2);
+    testBigNumbers = testBigNumbers.shiftRight(2);
     assertEquals("1", testBigNumbers.toString());
   }
 
   @Test
   public void rightShiftZeroTest() {
     testBigNumbers = new ElementNode(0);
-    testBigNumbers = testBigNumbers.rightShift(1);
+    testBigNumbers = testBigNumbers.shiftRight(1);
     assertEquals("0", testBigNumbers.toString());
   }
 
@@ -156,10 +156,10 @@ public class BigNumberTest {
   @Test
   public void countTest() {
     testBigNumbers = new ElementNode(2);
-    assertEquals(1, testBigNumbers.count());
+    assertEquals(1, testBigNumbers.length());
 
     testBigNumbers = new ElementNode("123456789");
-    assertEquals(9, testBigNumbers.count());
+    assertEquals(9, testBigNumbers.length());
   }
 
   @Test
@@ -177,7 +177,7 @@ public class BigNumberTest {
     testBigNumbers = testBigNumbers.addDigit(9);
     assertEquals(9, testBigNumbers.getDigitAt(0));
 
-    testBigNumbers = testBigNumbers.leftShift(2);
+    testBigNumbers = testBigNumbers.shiftLeft(2);
     testBigNumbers = testBigNumbers.addDigit(5);
 
     assertEquals(9, testBigNumbers.getDigitAt(2));
@@ -207,7 +207,7 @@ public class BigNumberTest {
   @Test
   public void getNextNodeTest() {
     testBigNumbers = testBigNumbers.addDigit(6);
-    testBigNumbers = testBigNumbers.leftShift(2);
+    testBigNumbers = testBigNumbers.shiftLeft(2);
     testBigNumbers = testBigNumbers.addDigit(3);
     assertEquals("60", testBigNumbers.getNextNode().toString());
   }
@@ -264,4 +264,5 @@ public class BigNumberTest {
   @Test (expected = IllegalArgumentException.class)
   public void setCarryToBigTest() {
     testBigNumbers.setCarry(25);
-  }}
+  }
+}

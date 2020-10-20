@@ -1,4 +1,4 @@
-package bignumbers;
+package bignumber;
 
 import java.util.HashSet;
 
@@ -78,7 +78,7 @@ public class ElementNode implements ListOfNumbers {
     for (int i = 0; i < numberSplit.length - 1; i++) {
       int digit = Integer.parseInt(numberSplit[i]);
       result = result.addDigit(digit);
-      result = result.leftShift(1);
+      result = result.shiftLeft(1);
     }
 
     result = result.addDigit(
@@ -90,7 +90,7 @@ public class ElementNode implements ListOfNumbers {
   }
 
   @Override
-  public int count() {
+  public int length() {
     int count = 1;
     ListOfNumbers tempNode = this;
 
@@ -103,9 +103,9 @@ public class ElementNode implements ListOfNumbers {
   }
 
   @Override
-  public ListOfNumbers leftShift(int numberOfShifts) {
+  public ListOfNumbers shiftLeft(int numberOfShifts) {
     if (numberOfShifts < 0) {
-      return this.rightShift(-numberOfShifts);
+      return this.shiftRight(-numberOfShifts);
     }
 
     if (this.next instanceof EmptyNode && this.value == 0) {
@@ -126,10 +126,10 @@ public class ElementNode implements ListOfNumbers {
   }
 
   @Override
-  public ListOfNumbers rightShift(int numberOfShifts) {
+  public ListOfNumbers shiftRight(int numberOfShifts) {
     if (numberOfShifts < 0) {
-      return leftShift(-numberOfShifts);
-    } else if (numberOfShifts >= this.count()) {
+      return shiftLeft(-numberOfShifts);
+    } else if (numberOfShifts >= this.length()) {
       return new ElementNode(0);
     }
 
@@ -184,7 +184,7 @@ public class ElementNode implements ListOfNumbers {
 
   @Override
   public int getDigitAt(int positionOfDigit) throws IllegalArgumentException {
-    if (positionOfDigit < 0 || positionOfDigit > count()) {
+    if (positionOfDigit < 0 || positionOfDigit > length()) {
       throw new IllegalArgumentException("There is no digit at this position.");
     }
 
@@ -218,8 +218,8 @@ public class ElementNode implements ListOfNumbers {
       throw new IllegalArgumentException("Number can't be null.");
     }
 
-    int sizeFirstNumber = count();
-    int sizeSecondNumber = numberToAdd.count();
+    int sizeFirstNumber = length();
+    int sizeSecondNumber = numberToAdd.length();
     ListOfNumbers firstNumber = this;
     ListOfNumbers secondNumber = numberToAdd;
     ListOfNumbers sum = new ElementNode(0);
@@ -284,6 +284,38 @@ public class ElementNode implements ListOfNumbers {
     }
 
     this.carry = value;
+  }
+
+  @Override
+  public int compareTo(ListOfNumbers o) {
+    if (o == null) {
+      throw new IllegalArgumentException("Cannot compare to null.");
+    }
+
+    if (this == o) {
+      return 0;
+    } else if (o instanceof EmptyNode) {
+      return 1;
+    } else {
+      int lengthA = this.length();
+      int lengthB = o.length();
+      if (lengthA > lengthB) {
+        return 1;
+      } else if (lengthA < lengthB) {
+        return -1;
+      } else {
+        String[] left = this.toString().split("");
+        String[] right = o.toString().split("");
+        for (int i = 0; i < lengthA; i++) {
+          if (Integer.parseInt(left[i]) > Integer.parseInt(right[i])) {
+            return 1;
+          } else if (Integer.parseInt(left[i]) < Integer.parseInt(right[i])) {
+            return -1;
+          }
+        }
+        return 0;
+      }
+    }
   }
 
   @Override

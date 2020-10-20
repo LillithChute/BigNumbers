@@ -1,4 +1,4 @@
-package bignumbers;
+package bignumber;
 
 /**
  * This implements the operations of an empty node.
@@ -6,17 +6,17 @@ package bignumbers;
 public class EmptyNode implements ListOfNumbers {
 
   @Override
-  public int count() {
+  public int length() {
     return 0;
   }
 
   @Override
-  public ListOfNumbers leftShift(int numberOfShifts) {
+  public ListOfNumbers shiftLeft(int numberOfShifts) {
     throw new IllegalArgumentException("You can't shift on an empty node.");
   }
 
   @Override
-  public ListOfNumbers rightShift(int numberOfShifts) {
+  public ListOfNumbers shiftRight(int numberOfShifts) {
     throw new IllegalArgumentException("You can't shift on an empty node.");
   }
 
@@ -68,6 +68,17 @@ public class EmptyNode implements ListOfNumbers {
   @Override
   public void setCarry(int value) {
     throw new IllegalArgumentException("Empty node.");
+  }
+
+  @Override
+  public int compareTo(ListOfNumbers o) {
+    if (this == o) {
+      return 0;
+    } else if (o instanceof EmptyNode) {
+      return 0;
+    } else {
+      return -1;
+    }
   }
 
   @Override
